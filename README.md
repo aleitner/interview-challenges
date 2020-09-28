@@ -1,4 +1,5 @@
-Interview with Riot question:
-Divide without using the `/` operator
+# Collection of solutions to interview challenges
 
-This repository contains the answers that I personally came up with
+* All solutions are written by me
+
+Backend Engineer to work on Project A

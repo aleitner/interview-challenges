@@ -34,7 +34,7 @@ func main() {
 }
 
 // fasterDivide with complexity of O(log(n))
-func fasterDivide (divident, divisor int) (quotient int) {
+func fasterDivide(divident, divisor int) (quotient int) {
 	// NB: IGNORE THIS IF FOR MEASUREMENTS
 	complexity := 1
 	defer func() {
@@ -55,19 +55,19 @@ func fasterDivide (divident, divisor int) (quotient int) {
 	// Initialize Start
 	high := divident
 	low := divisor
-	quotient = rand.Intn(high - low) + low
+	quotient = rand.Intn(high-low) + low
 
-	for quotient * divisor != cleanDivide {
+	for quotient*divisor != cleanDivide {
 		complexity += 1
 
 		check := quotient * divisor
 
 		if check > cleanDivide {
 			high = quotient - 1
-			quotient = rand.Intn(high - low + 1) + low
+			quotient = rand.Intn(high-low+1) + low
 		} else if check < cleanDivide {
 			low = quotient + 1
-			quotient = rand.Intn(high - low + 1) + low
+			quotient = rand.Intn(high-low+1) + low
 		}
 	}
 
@@ -75,10 +75,10 @@ func fasterDivide (divident, divisor int) (quotient int) {
 }
 
 // divide with complexity of O(n)
-func divide (divident, divisor int) int {
+func divide(divident, divisor int) int {
 	// NB: IGNORE THIS IF FOR MEASUREMENTS
 	complexity := 1
-	defer func () {
+	defer func() {
 		fmt.Printf("divide Complexity: %d\n", complexity)
 	}()
 
