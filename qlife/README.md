@@ -2,7 +2,11 @@
     QLife
 #### Position
     Backend Software Engineer
-### Question
+### Question 1
+    Receive strings that are numbers from stdin and make a list without duplicating numbers
+### Question 2
+    Receive strings from stdin and count the number of words that are capitalized or are numbers.
+### Question 3
 
     Parse csv data from stdin and find average of every column.
 
