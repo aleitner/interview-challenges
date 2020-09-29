@@ -23,14 +23,17 @@ package main
 
 import "fmt"
 
+// Add two number arrays together and print result as string
 func Add(num1 []int, num2 []int) string {
 	len1 := len(num1)
 	len2 := len(num2)
 
+	// If both nums are empty then no math necessary
 	if len1 == 0 && len2 == 0 {
 		return "0"
 	}
 
+	// The resulting number is up to 1 digit higher than the highest number
 	var resultSize int
 	if len1 > len2 {
 		resultSize = len1 + 1
@@ -38,42 +41,46 @@ func Add(num1 []int, num2 []int) string {
 		resultSize = len2 + 1
 	}
 
-	var result string
-	var excess int
-	var addByDigitResult int
+	var result string // Summation of num1 and num2
+	var sumDigitExcess int
+	var sumDigitResult int
 
 	for i := 1; i <= resultSize; i++ {
-		addByDigitResult, excess = addByDigit(i, num1, num2, excess)
-		if addByDigitResult == 0 && excess == 0 {
+		sumDigitResult, sumDigitExcess = sumDigit(i, num1, num2, sumDigitExcess)
+		if sumDigitResult == 0 && sumDigitExcess == 0 {
 			break
 		}
-		result = fmt.Sprintf("%d%s", addByDigitResult, result)
+		result = fmt.Sprintf("%d%s", sumDigitResult, result)
 	}
 
 	return result
 }
 
-func addByDigit(digit int, num1, num2 []int, previousExcess int) (result, excess int) {
-	num1Int := 0
-	num2Int := 0
+// sumDigit will sum the digit of num1 and num2 in addition to the amount carried over from a previous sumDigit with a lower digit value
+func sumDigit(digit int, num1, num2 []int, previousExcess int) (result, carryOver int) {
+	// Default to 0
+	num1DigitValue := 0
+	num2DigitValue := 0
 
-	// if num1 has values and the current digit isn't higher than the array contains
+	// check if num1 has a value for digit
 	if len(num1) > 0 && len(num1) >= digit {
-		num1Int = num1[len(num1) - digit]
+		num1DigitValue = num1[len(num1)-digit]
 	}
 
+	// check if num2 has a value for digit
 	if len(num2) > 0 && len(num2) >= digit {
-		num2Int = num2[digit - 1]
+		num2DigitValue = num2[digit-1]
 	}
 
-	result = num1Int + num2Int + previousExcess
+	// Sum the two values in addition to the amount carried over from the sum of the lower digit
+	result = num1DigitValue + num2DigitValue + previousExcess
 
 	if result > 9 {
-		excess = result / 10
+		carryOver = result / 10
 		result = result - 10
 	}
 
-	return result, excess
+	return result, carryOver
 }
 
 func main() {
